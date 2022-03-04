@@ -43,16 +43,7 @@ namespace RAMMS.Repository.Interfaces
         public FormJRepository FormJRepository { get; }
         public FormHImgRepository FormHImgRepository { get; }
         public FormS2Repository FormS2Repository { get; }
-        public FormS2DetailRepository FormS2DetailRepository { get; }
-
-        //IW Forms
-        public FormWCRepository FormWCRepository { get; }
-        public FormWGRepository FormWGRepository { get; }
-        public FormW2FcemRepository FormW2FcemRepository { get; }
-        FormW1Repository FormW1Repository { get; }
-        public FormW2Repository FormW2Repository { get; }
-       
-        //End IW Forms
+        public FormS2DetailRepository FormS2DetailRepository { get; }        
 
         FormS2QuarterDtlRepository FormS2QuarterDtlRepository { get; }
         CalendarRepository CalendarRepository { get; }

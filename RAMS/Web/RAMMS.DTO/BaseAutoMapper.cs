@@ -14,8 +14,7 @@ namespace RAMMS.DTO
             services.AddAutoMapper(
                 typeof(FormC1C2Profile),
                 typeof(FormFCProfile),
-                typeof(FormFDProfile),
-                typeof(IWProfiles)
+                typeof(FormFDProfile)
                 );
         }
     }
