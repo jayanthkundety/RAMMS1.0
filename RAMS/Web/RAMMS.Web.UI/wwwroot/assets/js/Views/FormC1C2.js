@@ -9,12 +9,10 @@
     this.Pattern = "";
     this.FindDetails = function () {
         if (ValidatePage("#divFindDetailsFC1C2")) {
-            //debugger;
             var tis = this;
             $("#AiAssetId").val($("#selAssetID option:selected").text());
             GetResponseValue("FindDetails", "FormC1C2", FormValueCollection("#divFindDetailsFC1C2"), function (data) {
                 if (data) {
-                    //debugger;
                     $("[finddetailhide]").hide();
                     $("#selAssetID,#formC1C2InsYear").prop("disabled", true).trigger("change").trigger("chosen:updated");
                     if (data.SubmitSts) {
@@ -85,7 +83,6 @@
         }
     }
     this.Save = function (isSubmit) {
-        //debugger;
         var tis = this;
         if (isSubmit) {
             $("#frmC1C2Data .svalidate").addClass("validate");
@@ -330,10 +327,9 @@
             //    var ctrl = $("#selRoadCode"); ctrl.find("option:hidden").show(); ctrl.val("").trigger("change").trigger("chosen:updated");
             //}
 
-            //frmC1C2.FilterAssestID();
+            frmC1C2.FilterAssestID();
         }
         this.RoadCodeChange = function (tis, isAdd) {
-            //debugger;
             var ctrl = $(tis);
             $("#txtRoadName").val(ctrl.find("option:selected").attr("Item1"));
             if (ctrl.val() != null && ctrl.val() != "") {

@@ -47,6 +47,9 @@ namespace RAMMS.Common.RefNumber
                 case FormType.FormDHeader:
                     format = FormDHeader;
                     break;
+                case FormType.FormB1B2:
+                    format = FormB1B2;
+                    break;
                 case FormType.FormC1C2:
                     format = FormC1C2;
                     break;
@@ -58,10 +61,7 @@ namespace RAMMS.Common.RefNumber
                     break;
                 case FormType.FormFCHeader:
                     format = FormFCHeader;
-                    break;
-                case FormType.FormB1B2:
-                    format = FormB1B2;
-                    break;
+                    break;      
                 case FormType.FormFDHeader:
                     format = FormFDHeader;
                     break;

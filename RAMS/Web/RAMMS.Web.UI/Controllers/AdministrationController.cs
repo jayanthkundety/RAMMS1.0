@@ -18,14 +18,21 @@ namespace RAMMS.Web.UI.Controllers
         private readonly ISecurity _security;
         private readonly IDivisionService divisionService;
         private readonly IRMUService rmuService;
+        private readonly ISectionService sectionService;
+        private readonly IRoadService roadService;
+
         public AdministrationController(IAdministrationService service, ISecurity security,
             IRMUService rmuService,
-            IDivisionService divisionService)
+            IDivisionService divisionService,
+             ISectionService sectionService,
+             IRoadService roadService)
         {
             _service = service;
             _security = security;
             this.divisionService = divisionService;
             this.rmuService = rmuService;
+            this.sectionService = sectionService;
+            this.roadService = roadService;
         }
         private Dictionary<string, string> GetPages()
         {
@@ -62,6 +69,139 @@ namespace RAMMS.Web.UI.Controllers
                         break;
                     case "division":
                         return View("~/Views/Administration/Division/Division.cshtml");
+                    case "road":
+                        CDataTable model = new CDataTable()
+                        {
+                            Name = "tblGrid",
+                            APIURL = "/Administration/GetRoadList",
+                            LeftFixedColumn = 1
+                        };
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = (string)null,
+                            title = "Action",
+                            IsFreeze = true,
+                            sortable = false,
+                            render = "jsAdmin.HeaderGrid.ActionRender"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "featureId",
+                            title = "FeatureId"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "divCode",
+                            title = "Division"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "rmuCode",
+                            title = "RMU Code"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "rmuName",
+                            title = "RMU Description"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "secCode",
+                            title = "Section Code"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "secName",
+                            title = "Section Name"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "rdCatgCode",
+                            title = "Road Category Code"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "rdCatgName",
+                            title = "Road Category Name"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "rdCode",
+                            title = "Road Code"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "rdName",
+                            title = "Road Name"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "frmLoc",
+                            title = "Location From"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "toLoc",
+                            title = "Location To"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "frmCh",
+                            title = "Ch From"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "frmChDeci",
+                            title = "Ch From Deci"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "toCh",
+                            title = "Ch To"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "toChDeci",
+                            title = "Ch To Deci"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "lengthPaved",
+                            title = "Paved Length"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "lengthUnpaved",
+                            title = "UnPaved Length"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "owner",
+                            title = "Owner"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "crBy",
+                            title = "Created By"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "crDt",
+                            title = "Created On",
+                            render = "jsAdmin.HeaderGrid.DateOfEntry"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "modBy",
+                            title = "Modified By"
+                        });
+                        model.Columns.Add(new CDataColumns()
+                        {
+                            data = "modDt",
+                            title = "Modified On",
+                            render = "jsAdmin.HeaderGrid.DateOfEntry"
+                        });
+                        return View("~/Views/Administration/Road.cshtml", model);
                 }
                 return View(id, GridTable(id));
             }
@@ -69,6 +209,26 @@ namespace RAMMS.Web.UI.Controllers
             {
                 return BadRequest("Invalid Request");
             }
+        }
+
+        public async Task<IActionResult> GetRoadById(int id)
+        {
+            RoadRequestDTO data = new RoadRequestDTO();
+            if (id > 0)
+                data = await roadService.GetRoadById(id) ?? new RoadRequestDTO();
+            return Json(data);
+        }
+
+        public async Task<bool> RemoveRoad(int id) => await this.roadService.RemoveRoad(id);
+
+        public async Task<int> SaveRoad(RoadRequestDTO model) => await this.roadService.SaveRoad(model);
+
+        public long LastInsertedRoadNo() => this.roadService.LastRoadInsertedNo();
+
+        public async Task<IActionResult> GetRoadList(DataTableAjaxPostModel searchData)
+        {
+            GridWrapper<object> roadList = await roadService.GetRoadList(searchData);
+            return Json(roadList);
         }
 
         public async Task<IActionResult> GetDivisionById(int id)
@@ -80,18 +240,12 @@ namespace RAMMS.Web.UI.Controllers
             return Json(obj);
         }
 
-        public async Task<IActionResult> GetSectionById(int id)
-        {
-            DivRmuSectionRequestDTO obj = new DivRmuSectionRequestDTO(); if (id > 0)
-            {
-                obj = await divisionService.GetDivRmuSectionById(id); obj = obj ?? new DivRmuSectionRequestDTO();
-            }
-            return Json(obj);
-        }
         public async Task<bool> RemoveDivision(int id) => await divisionService.Remove(id);
+
         public async Task<int> SaveDivision(DivisionRequestDTO model) => await divisionService.Save(model);
 
-        public async Task<int> SaveSection(DivRmuSectionRequestDTO model) => await divisionService.Save(model);
+        public async Task<IActionResult> GetDivList() =>  Json(await divisionService.GetList());
+
         public async Task<IActionResult> GetDivisionList(DataTableAjaxPostModel<DivisionRequestDTO> searchData)
         {
             FilteredPagingDefinition<DivisionRequestDTO> filteredPagingDefinition = new FilteredPagingDefinition<DivisionRequestDTO>();
@@ -111,14 +265,19 @@ namespace RAMMS.Web.UI.Controllers
             var result = await divisionService.GetList(filteredPagingDefinition);
             return Json(new { draw = searchData.draw, recordsFiltered = result.TotalRecords, recordsTotal = result.TotalRecords, data = result.PageResult });
         }
+
         public async Task<IActionResult> GetRMUById(int id)
         {
             RMURequestDTO obj = new RMURequestDTO(); if (id > 0) { obj = await rmuService.GetById(id); obj = obj ?? new RMURequestDTO(); }
             return Json(obj);
         }
+
         public async Task<bool> RemoveRMU(int id) => await rmuService.Remove(id);
+
         public async Task<int> SaveRMU(RMURequestDTO model) => await rmuService.Save(model);
+
         public IActionResult GetRMUListByDiv(string code) => Json(rmuService.GetList(code));
+
         public async Task<IActionResult> GetRMUList(DataTableAjaxPostModel<RMURequestDTO> searchData)
         {
             FilteredPagingDefinition<RMURequestDTO> filteredPagingDefinition = new FilteredPagingDefinition<RMURequestDTO>();
@@ -134,6 +293,48 @@ namespace RAMMS.Web.UI.Controllers
             var result = await rmuService.GetList(filteredPagingDefinition);
             return Json(new { draw = searchData.draw, recordsFiltered = result.TotalRecords, recordsTotal = result.TotalRecords, data = result.PageResult });
         }
+
+        public async Task<int> SaveSection(DivRmuSectionRequestDTO model) => await divisionService.Save(model);
+
+        public async Task<IActionResult> GetSectionById(int id)
+        {
+            DivRmuSectionRequestDTO obj = new DivRmuSectionRequestDTO(); if (id > 0)
+            {
+                obj = await divisionService.GetDivRmuSectionById(id); obj = obj ?? new DivRmuSectionRequestDTO();
+            }
+            return Json(obj);
+        }
+
+        public async Task<bool> RemoveSection(int id) => await sectionService.RemoveSection(id);
+
+        public async Task<int> SaveSection(SectionRequestDTO model) => await sectionService.SaveSection(model);
+
+        public IActionResult GetSectionListByDivAndRMU(string div, string rmu) => Json(sectionService.GetList(div, rmu));
+
+        public async Task<IActionResult> GetSectionList(
+                    DataTableAjaxPostModel<SectionRequestDTO> searchData)
+        {
+            FilteredPagingDefinition<SectionRequestDTO> filterOptions = new FilteredPagingDefinition<SectionRequestDTO>();
+            filterOptions.Filters = searchData.filterData ?? new SectionRequestDTO();
+            if (Request.Form.ContainsKey("columns[0][search][value]"))
+                filterOptions.Filters.DivCode = Request.Form["columns[0][search][value]"].ToString();
+            if (searchData.order != null)
+            {
+                filterOptions.ColumnIndex = searchData.order[0].column;
+                filterOptions.sortOrder = searchData.order[0].SortOrder == SortDirection.Asc ? SortOrder.Ascending : SortOrder.Descending;
+            }
+            filterOptions.RecordsPerPage = searchData.length;
+            filterOptions.StartPageNo = searchData.start;
+            PagingResult<SectionRequestDTO> sectionList = await sectionService.GetSectionList(filterOptions);
+            return Json(new
+            {
+                draw = searchData.draw,
+                recordsFiltered = sectionList.TotalRecords,
+                recordsTotal = sectionList.TotalRecords,
+                data = sectionList.PageResult
+            });
+        }
+
         public CDataTable GridTable(string pageid)
         {
             var grid = new CDataTable() { Name = "tblGrid", APIURL = "/Administration/GridList/?pid=" + pageid, LeftFixedColumn = 1 };
@@ -187,11 +388,13 @@ namespace RAMMS.Web.UI.Controllers
             grid.Columns.Add(new CDataColumns() { data = "ModifiedOn", title = "Modified On", render = "jsAdmin.HeaderGrid.DateOfEntry" });
             return grid;
         }
+
         public async Task<JsonResult> GridList(DataTableAjaxPostModel searchData, [FromQuery(Name = "pid")] string type)
         {
             return Json(await _service.GridList(searchData, type), JsonOption());
 
         }
+
         public async Task<JsonResult> Update(AdministratorDTO form)
         {
             Result<string> objResult = new Result<string>();
@@ -208,6 +411,10 @@ namespace RAMMS.Web.UI.Controllers
             }
             return Json(objResult, JsonOption());
         }
+
+        [HttpPost]
+        public IActionResult DeleteRoad(int PkRefNo) => (IActionResult)this.Json((object)this._service.DeleteRoad(PkRefNo, this._security.UserID.ToString()));
+
         public async Task<JsonResult> Delete(AdministratorDTO form)
         {
             Result<string> objResult = new Result<string>();
@@ -224,6 +431,7 @@ namespace RAMMS.Web.UI.Controllers
             }
             return Json(objResult, JsonOption());
         }
+
         //public IActionResult Division()
         //{
         //    return View();
@@ -262,24 +470,5 @@ namespace RAMMS.Web.UI.Controllers
 
         //New Change
 
-        public async Task<IActionResult> GetSectionList(DataTableAjaxPostModel<DivRmuSectionRequestDTO> searchData)
-        {
-            FilteredPagingDefinition<DivRmuSectionRequestDTO> filteredPagingDefinition = new FilteredPagingDefinition<DivRmuSectionRequestDTO>();
-
-            if (Request.Form.ContainsKey("columns[0][search][value]"))
-            {
-                searchData.filterData.DivCode  = Request.Form["columns[0][search][value]"].ToString();
-            }
-            filteredPagingDefinition.Filters = searchData.filterData;
-            if (searchData.order != null)
-            {
-                filteredPagingDefinition.ColumnIndex = searchData.order[0].column;
-                filteredPagingDefinition.sortOrder = searchData.order[0].SortOrder == SortDirection.Asc ? SortOrder.Ascending : SortOrder.Descending;
-            }
-            filteredPagingDefinition.RecordsPerPage = searchData.length; //Convert.ToInt32(Request.Form["length"]);
-            filteredPagingDefinition.StartPageNo = searchData.start; //Convert.ToInt32(Request.Form["start"]); //TODO
-            var result = await divisionService.GetList(filteredPagingDefinition);
-            return Json(new { draw = searchData.draw, recordsFiltered = result.TotalRecords, recordsTotal = result.TotalRecords, data = result.PageResult });
-        }
     }
 }

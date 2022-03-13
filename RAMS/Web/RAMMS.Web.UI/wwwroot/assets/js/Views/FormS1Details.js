@@ -183,7 +183,7 @@
         });
 
         $("#tblFollowupGroup [ulFollowup] li button").on("click", function () {
-            //debugger;
+            debugger;
             var btn = $(this);
             btn.closest("ul").find("[statuslegend]:visible").hide();
             var li = btn.closest("li");
@@ -315,7 +315,7 @@
     }
     this.BindFollowUp = function (post) {
         var objBtns = $("#divfollowupgroup ul li button");
-        //debugger;
+        debugger;
         if (post && post != null) {
             $("#tblFollowupGroup [ulFollowup] li button").each(function (liIndx) {
                 var btn = $(this);
@@ -386,7 +386,7 @@
         }
     }
     this.Save = function (IsExit) {
-        //debugger;
+        debugger;
         $("#hdnPlnWeekDay").val($("#tblPlanDaySchedule [ulScheduled] li button [icon]").length > 0 ? "1" : "");
         if (ValidatePage("#FormS1AdddetailsModal", "", "")) {
             var refNo = $("#txtDRefNumber");
@@ -403,7 +403,7 @@
             this.BindWKDetails(post);
             this.BindFollowUp(post);
             GetResponseValue("SaveDetails", "FormS1", FormValueCollection("#FormS1AdddetailsModal", post), function (data) {
-                //debugger;
+                debugger;
                 if (data != null) {
                     if (data.Details.IsExist) {
                         if (post.PkRefNo > 0) {

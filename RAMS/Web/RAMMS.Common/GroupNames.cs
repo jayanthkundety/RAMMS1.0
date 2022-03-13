@@ -21,5 +21,6 @@ namespace RAMMS.Common
         public const string HQAudit = "HQ-Aud";
         public const string HQJKRS = "HQ-JKRS";
         public const string Operations_ControlENDAYA = "Ops-CE";
+        public const string User_Management = "UM";
     }
 }

@@ -1,6 +1,6 @@
 ﻿var formJS = new function () {
     this.ActionRender = function (data) {
-        //debugger;
+        debugger;
         var title = "";
         if (data.RefID != "" && data.RefID != null) {
             title = data.RefID;

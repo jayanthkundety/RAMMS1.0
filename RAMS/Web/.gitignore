@@ -51,9 +51,5 @@
 /RAMMS.WebAPI/bin/Release/netcoreapp3.1
 /RAMMS.Web.UI/.config
 /RAMMS.Web.UI/Controllers/TestController1.cs
-/RAMMS.WebAPI/Controllers/APIAuthorize.cs
 /RAMMS.MobileApps
-/RAMMS.Web.UI/wwwroot/assets/js/Views/FormS1.js
-/RAMMS.Web.UI/Views/FormS1/FormS1.cshtml
-/RAMMS.Web.UI/Controllers/FormS1Controller.cs
 /UpgradeLog.htm

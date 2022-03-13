@@ -62,11 +62,7 @@ namespace RAMMS.Repository.Interfaces
         IFormC1C2Repository formC1C2Repository { get; }
         IModuleGroupRepository ModuleGroupRepository { get; }
         IAuditTransactionRepository AuditTransactionRepository { get; }
-        IAuditActionRepository AuditActionRepository { get; }
-      
-    
-
-        
+        IAuditActionRepository AuditActionRepository { get; }             
                  
         int Commit();
         Task<int> CommitAsync();
@@ -77,5 +73,7 @@ namespace RAMMS.Repository.Interfaces
         IRMURepository RMURepository { get; }
 
         IDivRmuSectionRepository DivRmuSectionRepository { get; }
+        ISectionRepository SectionRepository { get; }
+        IRoadRepository RoadRepository { get; }
     }
 }
