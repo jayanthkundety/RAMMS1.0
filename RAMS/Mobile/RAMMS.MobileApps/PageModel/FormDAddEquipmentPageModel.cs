@@ -49,7 +49,7 @@ namespace RAMMS.MobileApps.PageModel
 
         public string SelectedUnit { get; set; }
 
-        public int? strQty { get; set; }
+        public decimal? strQty { get; set; }
 
         public string strRemarksValue { get; set; }
 
