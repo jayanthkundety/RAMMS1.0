@@ -419,7 +419,44 @@ namespace RAMMS.MobileApps
         }
 
 
+        private void TapInstructedWork_Tapped(object sender, EventArgs e)
+        {
 
+            if (Toggle3.IsVisible)
+            {
+                Toggle3.IsVisible = false;
+            }
+            else
+            {
+                Toggle3.IsVisible = true;
+            }
+
+            Image image = sender as Image;
+            string source = image.Source as FileImageSource;  //Getting the name of source as string
+            if (String.Equals(source, "RoundedAddIcon.png"))
+            {
+                image.Source = "minusicon.png";
+            }
+            else
+            {
+                image.Source = "RoundedAddIcon.png";
+            }
+
+        }
+
+        private void InstructedWork_Tapped(object sender, EventArgs e)
+        {
+
+            if (Toggle3.IsVisible)
+            {
+                Toggle3.IsVisible = false;
+            }
+            else
+            {
+                Toggle3.IsVisible = true;
+            }
+
+        }
 
 
         private async void Entry_Focused(object sender, FocusEventArgs e)

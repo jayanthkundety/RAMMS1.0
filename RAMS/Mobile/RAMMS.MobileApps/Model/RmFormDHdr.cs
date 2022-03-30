@@ -21,6 +21,7 @@ namespace RAMMS.MobileApps
         public int? FdhWeekNo { get; set; }
         public int? FdhMonth { get; set; }
         public int? FdhDay { get; set; }
+        public DateTime? FdhDate { get; set; }
         public int? FdhYear { get; set; }
         public string FdhSn { get; set; }
         public string FdhSignPrp { get; set; }

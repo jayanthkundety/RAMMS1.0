@@ -37,7 +37,7 @@ namespace RAMMS.DTO.RequestBO
         
         public int? Year { get; set; }
 
-        
+        public DateTime? WeekDate { get; set; }
         public string SerialNo { get; set; }
 
         

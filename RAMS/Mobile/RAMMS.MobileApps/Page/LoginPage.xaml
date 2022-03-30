@@ -44,7 +44,7 @@
                                 <Image Source="JKKRlogo.png" Grid.Row="0" Grid.Column="1"  Margin="0,10,0,0" />
 
 
-                                <Image Source="Draft_logo.png" Grid.Row="0" Grid.Column="2" Margin="-20,-18,-20,-10"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <Image Source="logo.png" Grid.Row="0" Grid.Column="2" Margin="-20,-18,-20,-10"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
                                 <!--<Label Text="RAMS" FontAttributes="Bold"   FontFamily="BebasNeue Bold.ttf#BebasNeue Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="50" TextColor="#ad9d9d"/>-->
                                 <Image Source="Endayalogo.png" Grid.Row="0" Grid.Column="3" />

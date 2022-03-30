@@ -94,7 +94,10 @@ namespace RAMMS.MobileApps.PageModel
         private Xamarin.Forms.ImageSource soagreesignimage { get; set; }
 
 
+
         public string selectedrecdate { get; set; }
+
+        public DateTime? Dtformddate { get; set; }
 
         public string selectedvetdate { get; set; }
 
@@ -128,7 +131,7 @@ namespace RAMMS.MobileApps.PageModel
         public string soagreecode { get; set; }
         public string soagreedesg { get; set; }
 
-
+        DatePicker formddate;
         CustomDatePicker recdate, vetdate, verdate, soverdate, soprodate, soagreedate;
 
         Button btnSubmit, btnSave, btnCancel, btnDetailSave, btnFind;
@@ -255,8 +258,6 @@ namespace RAMMS.MobileApps.PageModel
         public ObservableCollection<FormDMaterialDetailsResponseDTO> MyMaterialBaseFormDList { get; set; }
 
         public ObservableCollection<FormDDetailsResponseDTO> MyDetailBaseFormDList { get; set; }
-
-
 
         public ObservableCollection<DDListItems> WeekListItems { get; set; }
         public ObservableCollection<DDListItems> WeekdayListItems { get; set; }
@@ -449,27 +450,11 @@ namespace RAMMS.MobileApps.PageModel
             ImageSource = "RoundedAddIcon.png";
             _editViewModel = initData as EditViewModel;
 
-            //if (App.DetailType == "Add")
-            //{
-            //    _editViewModel.Type = App.DetailType;
-            //    _editViewModel.HdrFahPkRefNo = App.DetailHeaderCode;
-
-            //}
-            //else
-            //{
-            //    App.DetailType = "";
-
-            //    App.DetailHeaderCode = 0;
-
-            //    _editViewModel.Type = _editViewModel.Type;
-
-            //    _editViewModel.HdrFahPkRefNo = _editViewModel.HdrFahPkRefNo;
-
-
-            //}
+          
 
             btnSave = CurrentPage.FindByName<Button>("btnSave");
 
+           
 
             btnCancel = CurrentPage.FindByName<Button>("btnCancel");
 
@@ -532,6 +517,8 @@ namespace RAMMS.MobileApps.PageModel
             sopronamepicker = CurrentPage.FindByName<ExtendedPicker>("sopronamepicker");
 
             soagreenamepicker = CurrentPage.FindByName<ExtendedPicker>("soagreenamepicker");
+
+            formddate = CurrentPage.FindByName<DatePicker>("formddate");
 
             recdate = CurrentPage.FindByName<CustomDatePicker>("recdate");
 
@@ -608,7 +595,7 @@ namespace RAMMS.MobileApps.PageModel
 
             FormAFlatDetailGridListview = CurrentPage.FindByName<ListView>("list");
 
-
+            formddate.DateSelected += Formddate_DateSelected;
 
             DDYearListItems = new ObservableCollection<DDListItems>();
 
@@ -635,6 +622,17 @@ namespace RAMMS.MobileApps.PageModel
             DDInspUserListListItems = new ObservableCollection<DDListItems>();
         }
 
+        private void Formddate_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            DateTime dt = ((DatePicker)sender).Date;
+            Dictionary<int, string> keyValues = GetWeekNo(dt);
+            if (keyValues != null)
+            {
+                weekpick.SelectedIndex = WeekListItems.ToList().FindIndex(a => Convert.ToInt32(a.Value) == keyValues.ElementAt(0).Key);
+                weekdaypick.SelectedIndex = WeekdayListItems.ToList().FindIndex(a => a.Value == keyValues.ElementAt(0).Value);
+                yearpick.SelectedIndex = DDYearListItems.ToList().FindIndex(a => a.Value == dt.Year.ToString());
+            }
+        }
 
         private async Task<int> Dropdown()
         {
@@ -1453,9 +1451,7 @@ namespace RAMMS.MobileApps.PageModel
 
             return new ObservableCollection<FormDHeaderResponseDTO>();
         }
-
-
-
+        
         public async Task<ObservableCollection<FormDHeaderResponseDTO>> SaveFormDHeaderList()
         {
             //_userDialogs.ShowLoading("Loading");
@@ -1546,8 +1542,6 @@ namespace RAMMS.MobileApps.PageModel
             return new ObservableCollection<FormDHeaderResponseDTO>();
         }
 
-
-
         public async Task<string> GetReferenceNumber(int? WeekNo, int? MonthNo, int? Year, string CrewUnit)
         {
 
@@ -1607,8 +1601,6 @@ namespace RAMMS.MobileApps.PageModel
             return StrRefcode;
         }
 
-
-
         public async Task<ObservableCollection<DDListItems>> GetRecnameUserList()
         {
             try
@@ -1647,7 +1639,6 @@ namespace RAMMS.MobileApps.PageModel
             }
             return new ObservableCollection<DDListItems>();
         }
-
 
         public async Task<ObservableCollection<DDListItems>> GetVetUserList()
         {
@@ -1688,7 +1679,6 @@ namespace RAMMS.MobileApps.PageModel
             return new ObservableCollection<DDListItems>();
         }
 
-
         public async Task<ObservableCollection<DDListItems>> GetVerUserList()
         {
             try
@@ -1726,7 +1716,6 @@ namespace RAMMS.MobileApps.PageModel
             }
             return new ObservableCollection<DDListItems>();
         }
-
 
         public async Task<ObservableCollection<DDListItems>> GetsovernameList()
         {
@@ -1873,6 +1862,8 @@ namespace RAMMS.MobileApps.PageModel
                     //recsignview
                     recdate.IsEnabled = bValue;
 
+                    formddate.IsEnabled = bValue;
+
                     recnamepicker.IsEnabled = bValue;
 
                     // recsignview.IsEnabled = bValue;
@@ -1946,6 +1937,8 @@ namespace RAMMS.MobileApps.PageModel
                     //recsignview
                     recdate.IsEnabled = true;
 
+                    formddate.IsEnabled = true;
+
                     recnamepicker.IsEnabled = true;
 
                     //recsignview.IsEnabled = true;
@@ -2018,14 +2011,13 @@ namespace RAMMS.MobileApps.PageModel
                     yearpick.IsEnabled = bValue;
                     //recsignview
                     recdate.IsEnabled = bValue;
-
+                    formddate.IsEnabled = bValue;
                     recnamepicker.IsEnabled = bValue;
 
                     entrlsupervisor.IsEnabled = bValue;
 
                     //recsignview.IsEnabled = bValue;
                     //recsignview
-                    recdate.IsEnabled = bValue;
 
                     recnamepicker.IsEnabled = bValue;
 
@@ -2132,8 +2124,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
-
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
@@ -2186,7 +2176,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
         public async Task<int?> GetDetailSerialNo(int HeaderID)
         {
 
@@ -2228,8 +2217,6 @@ namespace RAMMS.MobileApps.PageModel
             }
             return iRet;
         }
-
-
 
         public async Task<FormDHeaderRequestDTO> GetEditViewHeaderdetails(int HeaderCode)
         {
@@ -2392,6 +2379,7 @@ namespace RAMMS.MobileApps.PageModel
                         //recdate.Date = dateTime;
                         recdate.NullableDate = SelectedHdrEditItem.DateReported.HasValue ? SelectedHdrEditItem.DateReported.Value : (DateTime?)null;
 
+                        Dtformddate = SelectedHdrEditItem.WeekDate.HasValue ? SelectedHdrEditItem.WeekDate.Value : (DateTime?)null;
                         //vetnamepicker.Items.Clear();
 
                         vetnamepicker.ItemsSource = DDvetnameListItems.Select((DDListItems arg) => arg.Text).ToList();
@@ -2546,87 +2534,6 @@ namespace RAMMS.MobileApps.PageModel
                         //soagreedate.Date = dateTime;
                         soagreedate.NullableDate = SelectedHdrEditItem.DtAgrdSo.HasValue ? SelectedHdrEditItem.DtAgrdSo.Value : (DateTime?)null;
 
-                        //SelectedYear = SelectedHdrEditItem.Year;
-
-                        //SelectedSection = SelectedHdrEditItem.section;
-
-                        //StrRefcode = SelectedHdrEditItem.Id;
-
-                        //strInspSign = SelectedHdrEditItem.SignPrp;
-
-                        //strVerSign = SelectedHdrEditItem.SignVer;
-
-                        //Selectedinspuser = SelectedHdrEditItem.UseridPrp.ToString();
-
-                        //await GetInspUserList();
-
-                        //userinspcode = CurrentPage.FindByName<ExtendedPicker>("insppicker");
-
-                        //userinspcode.ItemsSource = DDInspUserListListItems.Select((DDListItems arg) => arg.Text).ToList();
-
-                        //int inspindex = DDInspUserListListItems.ToList().FindIndex(a => Convert.ToInt32(a.Value) == SelectedHdrEditItem.UseridPrp);
-
-                        //if (inspindex == -1) { inspindex = 1; }
-
-                        //userinspcode.SelectedIndex = inspindex;
-
-
-
-                        // = SelectedHdrEditItem.UsernamePrp;
-
-                        //strinspDesignation = SelectedHdrEditItem.DesignationPrp;
-
-
-                        //dtDateinsp = DateTime.Now.Date; //SelectedHdrEditItem.DtPrp.Value;
-
-
-                        //Selectedverpuser = SelectedHdrEditItem.UseridVer.ToString();
-
-
-                        //strverName = SelectedHdrEditItem.UsernamePrp;
-
-                        //strverDesignation = SelectedHdrEditItem.DesignationPrp;
-
-                        ////vercode = CurrentPage.FindByName<DatePicker>("verdatepicker");
-
-                        //dtdateever = DateTime.Now.Date; //SelectedHdrEditItem.VerifiedDt.Value;
-
-
-                        //inspimage = Xamarin.Forms.ImageSource.FromStream(
-                        //() => new MemoryStream(Convert.FromBase64String(strInspSign)));
-
-                        //padView = CurrentPage.FindByName<SignaturePadView>("SignatureView");
-
-                        ////if(inspimage != null || inspimage.IsEmpty)
-                        ////byte[] bytes = Convert.FromBase64String(strInspSign);
-
-                        //// byte[] resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(bytes, 500, 1000);
-                        ////float[] dataArray = Enumerable.Range(0, bytes.Length / 4).Select(i => BitConverter.ToSingle(bytes, i * 4)).ToArray();
-
-                        ////Point[] points;
-                        ////using (var ms = new MemoryStream(bytes))
-                        ////{
-                        ////    using (var r = new BinaryReader(ms))
-                        ////    {
-                        ////        int len = r.ReadInt32();
-                        ////        points = new Point[len];
-                        ////        for (int i = 0; i != len; i++)
-                        ////        {
-                        ////            points[i] = new Point(r.ReadInt32(), r.ReadInt32());
-                        ////        }
-                        ////    }
-                        ////}
-
-                        ////padView.Points = ;
-
-                        //padView.BackgroundImage = inspimage;
-
-                        //verimage = Xamarin.Forms.ImageSource.FromStream(
-                        //() => new MemoryStream(Convert.FromBase64String(strVerSign)));
-
-                        //vpadview = CurrentPage.FindByName<SignaturePadView>("VPadView");
-                        //vpadview.BackgroundImage = verimage;
-
                     }
                     else
                     {
@@ -2652,10 +2559,6 @@ namespace RAMMS.MobileApps.PageModel
             }
             return new FormDHeaderRequestDTO();
         }
-
-
-
-
 
         public ICommand recredosign
         {
@@ -3182,7 +3085,6 @@ namespace RAMMS.MobileApps.PageModel
             return new ObservableCollection<DDListItems>();
         }
 
-
         public async Task<ObservableCollection<DDListItems>> GetTypeCode(string ddlType)
         {
             try
@@ -3227,8 +3129,6 @@ namespace RAMMS.MobileApps.PageModel
             }
             return new ObservableCollection<DDListItems>();
         }
-
-
 
         public async Task<ObservableCollection<DDListItems>> GetddListDetails(string ddtype)
         {
@@ -3300,8 +3200,6 @@ namespace RAMMS.MobileApps.PageModel
             return new ObservableCollection<DDListItems>();
         }
 
-
-
         public ICommand ClickMeActionCommand
         {
             get
@@ -3351,8 +3249,6 @@ namespace RAMMS.MobileApps.PageModel
                 });
             }
         }
-
-
 
         public async Task<ObservableCollection<FormDLabourDetailsResponseDTO>> GetMyFormDLabourListReports(string HeaderID, int currentpageno = 0)
         {
@@ -3481,8 +3377,6 @@ namespace RAMMS.MobileApps.PageModel
             }
             return iResultValue;
         }
-
-
 
         public async void GetUserData()
         {
@@ -3702,8 +3596,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
-
         public async Task<ObservableCollection<FormDHeaderResponseDTO>> UpdateSignature(string Type)
         {
             //_userDialogs.ShowLoading("Loading");
@@ -3728,6 +3620,7 @@ namespace RAMMS.MobileApps.PageModel
                             ReportedByUsername = reccode,
                             ReportedByDesignation = recdesg,
                             DateReported = recdate.NullableDate,
+                            WeekDate = Dtformddate,
                             SignVer = App.sversignview,
                             UseridVer = SelectedVerName,
                             UsernameVer = vercode,
@@ -3769,6 +3662,7 @@ namespace RAMMS.MobileApps.PageModel
                             ReportedByUsername = reccode,
                             ReportedByDesignation = recdesg,
                             DateReported = recdate.NullableDate,
+                            WeekDate = Dtformddate,
                             SignVer = App.sversignview,
                             UseridVer = SelectedVerName,
                             UsernameVer = vercode,
@@ -3871,10 +3765,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
-
-
-
         //Equiment Detials
         public ICommand ClickMeEquimentActionCommand
         {
@@ -3926,8 +3816,6 @@ namespace RAMMS.MobileApps.PageModel
                 });
             }
         }
-
-
 
         public async Task<ObservableCollection<FormDEquipDetailsResponseDTO>> GetMyFormDEquipmentListReports(string HeaderID, int currentpageno = 0)
         {
@@ -4136,8 +4024,6 @@ namespace RAMMS.MobileApps.PageModel
             }
         }
 
-
-
         public async Task<ObservableCollection<FormDMaterialDetailsResponseDTO>> GetMyFormDMaterialListReports(string HeaderID, int currentpageno = 0)
         {
             //_userDialogs.ShowLoading("Loading");
@@ -4242,7 +4128,6 @@ namespace RAMMS.MobileApps.PageModel
             return new ObservableCollection<FormDMaterialDetailsResponseDTO>();
         }
 
-
         public async Task<int> DeleteMaterialHeaderdetails(int HeaderCode)
 
         {
@@ -4298,12 +4183,7 @@ namespace RAMMS.MobileApps.PageModel
             return iResultValue;
         }
 
-
-
         //detail View
-
-
-
         public ICommand ClickMeDetailActionCommand
         {
             get
@@ -4373,8 +4253,6 @@ namespace RAMMS.MobileApps.PageModel
                 });
             }
         }
-
-
 
         public async Task<ObservableCollection<FormDDetailsResponseDTO>> GetMyFormDDetailListReports(string HeaderID, int currentpageno = 0)
         {
@@ -4479,8 +4357,6 @@ namespace RAMMS.MobileApps.PageModel
 
             return new ObservableCollection<FormDDetailsResponseDTO>();
         }
-
-
         public async Task<int> DeleteDetailHeaderdetails(int HeaderCode)
 
         {
@@ -4788,7 +4664,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
         public ICommand FormDSubmitedCommand
         {
             get
@@ -5050,7 +4925,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
         public ICommand AddLabourCommand
         {
             get
@@ -5078,7 +4952,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
         public ICommand AddEquipCommand
         {
             get
@@ -5105,7 +4978,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
         public ICommand AddMaterialCommand
         {
             get
@@ -5131,7 +5003,6 @@ namespace RAMMS.MobileApps.PageModel
             }
 
         }
-
 
         public ICommand FormDFindDetailCommand
         {
@@ -5178,7 +5049,6 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
-
         public ICommand AddDetailCommand
         {
             get
@@ -5212,7 +5082,6 @@ namespace RAMMS.MobileApps.PageModel
             }
 
         }
-
 
         public ICommand SaveandUpdateCommand
         {
@@ -5492,6 +5361,18 @@ namespace RAMMS.MobileApps.PageModel
 
         }
 
+
+        private Dictionary<int,string> GetWeekNo(DateTime dt)
+        {
+            Dictionary<int, string> keyValues = new Dictionary<int, string>();
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int weekNum = ciCurr.Calendar.GetWeekOfYear(dt, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
+            string weekday = dt.DayOfWeek.ToString();
+            keyValues.Add(weekNum, weekday);
+            return keyValues;
+        }
+
+        
         private int GetMonthNumber(int? weekNumber, int dayOfWeek)
         {
             DateTime yearstart = new DateTime(2021, 1, 1);

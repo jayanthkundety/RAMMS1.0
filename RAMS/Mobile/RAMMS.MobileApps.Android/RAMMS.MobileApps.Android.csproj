@@ -37,6 +37,16 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\mohan\AppData\Local\Xamarin\Mono for Android\Keystore\RAMMS\RAMMS.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>123456</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>eRAMMS Mobile</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>123456</AndroidSigningKeyPass>
+    <AndroidSupportedAbis />
+    <MandroidI18n />
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -158,6 +168,14 @@
     <AndroidAsset Include="Assets\BebasNeue Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Circlegraph1.PNG">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\Circlegraph2.PNG">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Tabbar.xml" />
     <AndroidResource Include="Resources\layout\Toolbar.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
@@ -342,11 +360,6 @@
     <AndroidResource Include="Resources\drawable\w.png" />
     <AndroidResource Include="Resources\drawable\h.png" />
     <AndroidResource Include="Resources\drawable\overallspi.PNG" />
-    <AndroidResource Include="Resources\drawable\Circlegraph1.PNG" />
-    <AndroidResource Include="Resources\drawable\Circlegraph5.PNG" />
-    <AndroidResource Include="Resources\drawable\Circlegraph4.PNG" />
-    <AndroidResource Include="Resources\drawable\Circlegraph3.PNG" />
-    <AndroidResource Include="Resources\drawable\Circlegraph2.PNG" />
     <AndroidResource Include="Resources\drawable\CCC.png" />
     <AndroidResource Include="Resources\drawable\BBB.png" />
     <AndroidResource Include="Resources\drawable\AAA.png" />
@@ -377,6 +390,12 @@
     <AndroidResource Include="Resources\drawable\Downloadicon.png" />
     <AndroidResource Include="Resources\drawable\GPS.png" />
     <AndroidResource Include="Resources\drawable\Pdf.png" />
+    <AndroidResource Include="Resources\drawable\logo.png" />
+    <AndroidResource Include="Resources\drawable\HHH.png" />
+    <AndroidResource Include="Resources\drawable\III.png" />
+    <AndroidResource Include="Resources\drawable\CirclegraphMIRI.png" />
+    <AndroidResource Include="Resources\drawable\CirclegraphNIAH.png" />
+    <AndroidResource Include="Resources\drawable\InstructedWorkListing.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

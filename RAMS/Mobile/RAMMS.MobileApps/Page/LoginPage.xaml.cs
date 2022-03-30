@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,13 +22,14 @@ namespace RAMMS.MobileApps
             var images = new ObservableCollection<name>
             {
                    new name { images= "AAA.png" },
-                   new name { images ="BBB.png"  },
-                   new name { images ="CCC.png"  },
-                   new name { images ="DDD.png"  },
-                   new name { images ="EEE.png"  },
-                   new name { images ="FFF.png"  },
-                   new name { images ="GGG.png"   },
-                   new name { images ="III.png"   }
+                   new name { images ="BBB.png" },
+                   new name { images ="CCC.png" },
+                   new name { images ="DDD.png" },
+                   new name { images ="EEE.png" },
+                   new name { images ="FFF.png" },
+                   new name { images ="GGG.png" },
+                   new name { images ="HHH.png" },
+                   new name { images ="III.png" }
             };
             MainCarouselView.ItemsSource = images;
             Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
@@ -47,11 +48,10 @@ namespace RAMMS.MobileApps
             public string images { get; set; }
         }
 
-        //private void Button_Clicked(object sender, EventArgs e)
-        //{
-        //    Navigation.PushAsync(new FormJOnePage());
-        //}
-
+        public void Login()
+        {
+            Navigation.PushAsync(new FormJOnePage());
+        }
 
         //private void Button_Clicked(object sender, System.EventArgs e)
         //{

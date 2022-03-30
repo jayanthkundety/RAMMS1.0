@@ -21,6 +21,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="JKRSLogo.png" Grid.Row="0" Grid.Column="0" Margin="0,-10,0,0"/>
+                    <Image Source="logo.png" Grid.Row="0" Grid.Column="1" Margin="0,-10,0,0" />
                     <Label Text="ROAD ASSET MANAGEMENT AND MAINTENANCE SYSTEM" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="Black" FontAttributes="Bold" FontSize="Large" Grid.Row="0" Grid.Column="2"  Margin="0,-10,0,0"/>
                     <Image Source="ECSBLogo.png" Grid.Row="0" Grid.Column="4"  Margin="0,-10,0,0"/>
 
@@ -70,7 +71,7 @@
                                 <locals:FrameRenders Grid.Row="1" Grid.Column="2" BackgroundColor="#f2f2f2" FrameCornerRadius="7"   IsClippedToBounds="True" Padding="0,0,0,0"  ColorName="LightGray"    BorderColor="Black" >
 
                                     <!--<fe:AdvancedFrame  InnerBackground="{StaticResource DashboardbgColor}" OutlineColor="{StaticResource BoxviewColor}">-->
-                                    <local:EntryControl x:Name="entrllabour" Text="{Binding strLabourValue}" Keyboard="Numeric" TextColor="Black" ClassId="ClassDetails" FontFamily="{StaticResource ProximaNovaRegularFont}"  IsEnabled="False" />
+                                    <local:EntryControl x:Name="entrllabour" Text="{Binding strLabourValue}" Keyboard="Text" TextColor="Black" ClassId="ClassDetails" FontFamily="{StaticResource ProximaNovaRegularFont}"  IsEnabled="False" />
                                 <!--</fe:AdvancedFrame>-->
                                 </locals:FrameRenders>
                             </Grid>

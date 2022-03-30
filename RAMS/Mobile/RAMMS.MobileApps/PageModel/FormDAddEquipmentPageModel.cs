@@ -136,7 +136,17 @@ namespace RAMMS.MobileApps.PageModel
 
                         strLabourValue = DDLabourListItems[labourpick.SelectedIndex].Text.ToString().Split('-')[1];
 
-                        strRemarksValue = strLabourValue;
+                        if (SelectedLabour == "99999999")
+                        {
+                            entrllabour.IsEnabled = true;
+                            strRemarksValue = "";
+                            strLabourValue = "";
+                        }
+                        else
+                        {
+                            entrllabour.IsEnabled = false;
+                            strRemarksValue = strLabourValue;
+                        }
                     }
 
                 };
@@ -332,7 +342,7 @@ namespace RAMMS.MobileApps.PageModel
                 unitpick.IsEnabled = bValue;
 
                 enctrlQty.IsEnabled = bValue;
-
+                entrllabour.IsEnabled = bValue;
                 enctrlRemarks.IsEnabled = bValue;
 
                 btnCancel.IsEnabled = true;

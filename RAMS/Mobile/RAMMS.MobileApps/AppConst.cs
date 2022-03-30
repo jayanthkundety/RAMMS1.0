@@ -83,7 +83,7 @@
 
 
         //UAT URL
-        public static readonly string WebBaseURL = "http://10.249.5.136:806";
+        public static readonly string WebBaseURL = "http://210.19.250.214";// "http://60.50.208.178";
 
         public static readonly string ImageApiBaseAddress = $"{WebBaseURL}/NOD/UploadImage";
 
@@ -93,7 +93,7 @@
 
         public static readonly string ImageApiTestBaseAddress = $"{WebBaseURL}/NOD/UploadImage";
 
-        public static readonly string DevApiBaseAddress = "http://10.249.5.136:807";
+        public static readonly string DevApiBaseAddress = "http://210.19.250.214:8010";// "http://60.50.208.178:8010";
 
 
         //Form D
