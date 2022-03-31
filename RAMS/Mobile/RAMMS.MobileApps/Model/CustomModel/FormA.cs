@@ -1,4 +1,6 @@
-﻿namespace RAMMS.MobileApps
+﻿using System;
+
+namespace RAMMS.MobileApps
 {
     public class FormA
     {
@@ -29,6 +31,8 @@
         public int? Year { get; set; }
 
         public int? dtlserialNo { get; set; }
+
+        public DateTime? WeekDate { get; set; }
 
         ////DetailView
         //public int HeaderNo { get; set; }

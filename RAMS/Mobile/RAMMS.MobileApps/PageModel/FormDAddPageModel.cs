@@ -434,10 +434,7 @@ namespace RAMMS.MobileApps.PageModel
         public FormDAddPageModel(IRestApi restApi, IUserDialogs userDialogs, ILocalDatabase localDatabase)
         {
             _userDialogs = userDialogs;
-
             _restApi = restApi;
-            _restApi = restApi;
-
             _localDatabase = localDatabase;
 
 
@@ -626,6 +623,7 @@ namespace RAMMS.MobileApps.PageModel
         {
             DateTime dt = ((DatePicker)sender).Date;
             Dictionary<int, string> keyValues = GetWeekNo(dt);
+            Dtformddate = dt;
             if (keyValues != null)
             {
                 weekpick.SelectedIndex = WeekListItems.ToList().FindIndex(a => Convert.ToInt32(a.Value) == keyValues.ElementAt(0).Key);
@@ -1394,6 +1392,8 @@ namespace RAMMS.MobileApps.PageModel
 
                         CrewUnitName = Selectedinspuser,
 
+                        WeekDate = Dtformddate,
+
                         WeekNo = Convert.ToInt32(SelectedMonth),
 
                         Day = SelectedWeekDay,
@@ -1475,6 +1475,8 @@ namespace RAMMS.MobileApps.PageModel
                         DivisionName = strDivision,
 
                         CrewUnitName = strSupervisor,
+
+                        WeekDate = Dtformddate,
 
                         WeekNo = Convert.ToInt32(SelectedMonth),
 
@@ -2153,6 +2155,8 @@ namespace RAMMS.MobileApps.PageModel
 
                 GetHeaderNoCode = _editViewModel.HdrFahPkRefNo;
 
+                Dtformddate = _editViewModel.WeekDate;
+
                 await Dropdown();
 
                 SelectedHdrEditItem = await GetEditViewHeaderdetails(GetHeaderNoCode);
@@ -2240,6 +2244,8 @@ namespace RAMMS.MobileApps.PageModel
                         StrRefcode = SelectedHdrEditItem.ReferenceID;
 
                         strDivision = SelectedHdrEditItem.DivisionName;
+
+                        Dtformddate = SelectedHdrEditItem.WeekDate;
 
                         //rmucode.Items.Clear();
 
@@ -3620,7 +3626,6 @@ namespace RAMMS.MobileApps.PageModel
                             ReportedByUsername = reccode,
                             ReportedByDesignation = recdesg,
                             DateReported = recdate.NullableDate,
-                            WeekDate = Dtformddate,
                             SignVer = App.sversignview,
                             UseridVer = SelectedVerName,
                             UsernameVer = vercode,
@@ -3662,7 +3667,6 @@ namespace RAMMS.MobileApps.PageModel
                             ReportedByUsername = reccode,
                             ReportedByDesignation = recdesg,
                             DateReported = recdate.NullableDate,
-                            WeekDate = Dtformddate,
                             SignVer = App.sversignview,
                             UseridVer = SelectedVerName,
                             UsernameVer = vercode,
