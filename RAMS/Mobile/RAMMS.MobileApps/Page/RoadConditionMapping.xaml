@@ -484,28 +484,8 @@
                                     <BoxView BackgroundColor="Gray" Margin="49,27,49,-7" Grid.Row="3" Grid.RowSpan="17" Grid.Column="4"></BoxView>
 
 
-
-
-
-
-
-
-
-
-
                                     <Button Text="Q773" AutomationId="Q773" Clicked="Button_Clicked_4" BorderWidth="2" Margin="0,8,0,8" CornerRadius="10" BorderColor="#b3d5ff" BackgroundColor="#C8E1FF" Grid.Row="3" Grid.Column="6"></Button>
                                     <BoxView BackgroundColor="#80b9ff" Margin="-55,26.5,-8,26.5" Grid.Row="3"  Grid.Column="5"></BoxView>
-
-
-
-
-
-
-
-
-
-
-
 
 
                                     <Button Text="To Marudi" BorderWidth="2" Margin="0,8,0,8" CornerRadius="10" BorderColor="#1D2D50" BackgroundColor="#C8E1FF" Grid.Row="6" Grid.Column="4"></Button>

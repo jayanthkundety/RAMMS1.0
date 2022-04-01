@@ -120,19 +120,6 @@ namespace RAMMS.MobileApps.Page
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Bakong  Search
 
 
@@ -167,16 +154,6 @@ namespace RAMMS.MobileApps.Page
             BakongNamesListView.ItemsSource = bakongnames.Where(name => name.ToLower().Contains(keyword.ToLower()));
         }
 
-
-
-
-
-
-
-
-
-
-
         //Marudi  Search
 
 
@@ -210,16 +187,6 @@ namespace RAMMS.MobileApps.Page
             var keyword = MarudiMainSearchBar.Text;
             MarudiNamesListView.ItemsSource = marudinames.Where(name => name.ToLower().Contains(keyword.ToLower()));
         }
-
-
-
-
-
-
-
-
-
-
 
 
         //Bekenu  Search
@@ -280,153 +247,6 @@ namespace RAMMS.MobileApps.Page
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void Miri_Clicked_2(object sender, EventArgs e)
         {
             {
@@ -452,27 +272,6 @@ namespace RAMMS.MobileApps.Page
             bakongg.IsVisible = true;
             marudii.IsVisible = true;
             bekenuu.IsVisible = true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -502,14 +301,6 @@ namespace RAMMS.MobileApps.Page
 
             }
 
-
-
-
-
-
-
-
-
         }
         private void BarioButton_Clicked(object sender, EventArgs e)
         {
@@ -521,8 +312,6 @@ namespace RAMMS.MobileApps.Page
 
                 else
                     btn.BackgroundColor = Color.Transparent;
-
-
 
                 //Navigation.PushModalAsync(new MyProfile_Page());
 
@@ -543,32 +332,6 @@ namespace RAMMS.MobileApps.Page
             marudii.IsVisible = true;
             bekenuu.IsVisible = true;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             var button = (Button)sender;
 
 
@@ -579,11 +342,6 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = false;
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = false;
-
-
-
-
-
 
             }
             else
@@ -596,12 +354,6 @@ namespace RAMMS.MobileApps.Page
 
 
             }
-
-
-
-
-
-
 
         }
 
@@ -631,32 +383,6 @@ namespace RAMMS.MobileApps.Page
             bekenuu.IsVisible = true;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             var button = (Button)sender;
 
 
@@ -667,11 +393,6 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = true;
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = false;
-
-
-
-
-
 
             }
             else
@@ -684,11 +405,6 @@ namespace RAMMS.MobileApps.Page
 
 
             }
-
-
-
-
-
         }
 
         private void MarudiButton_Clicked_2(object sender, EventArgs e)
@@ -716,25 +432,6 @@ namespace RAMMS.MobileApps.Page
             marudii.IsVisible = false;
             bekenuu.IsVisible = true;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             var button = (Button)sender;
 
 
@@ -745,11 +442,6 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = false;
                 Stack4.IsVisible = true;
                 Stack5.IsVisible = false;
-
-
-
-
-
 
             }
             else
@@ -762,16 +454,6 @@ namespace RAMMS.MobileApps.Page
 
 
             }
-
-
-
-
-
-
-
-
-
-
 
         }
         private void BekenuButton_Clicked_3(object sender, EventArgs e)
@@ -799,34 +481,6 @@ namespace RAMMS.MobileApps.Page
             marudii.IsVisible = true;
             bekenuu.IsVisible = false;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             var button = (Button)sender;
 
 
@@ -837,12 +491,6 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = false;
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = true;
-
-
-
-
-
-
             }
             else
             {
@@ -852,16 +500,7 @@ namespace RAMMS.MobileApps.Page
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = true;
 
-
             }
-
-
-
-
-
-
-
-
 
         }
 
@@ -909,12 +548,7 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = false;
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = false;
-               
-                
-               
-               
-
-
+              
             }
             else
             {
@@ -939,11 +573,7 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = true;
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = false;
-                
-                
-               
-               
-
+ 
 
             }
             else
@@ -999,11 +629,6 @@ namespace RAMMS.MobileApps.Page
                 Stack3.IsVisible = false;
                 Stack4.IsVisible = false;
                 Stack5.IsVisible = true;
-               
-                
-                
-                
-
 
             }
             else

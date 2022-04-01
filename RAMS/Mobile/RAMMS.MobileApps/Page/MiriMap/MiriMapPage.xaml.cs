@@ -18,7 +18,7 @@ namespace RAMMS.MobileApps.Page.MiriMap
             InitializeComponent();
             UserDialogs.Instance.ShowLoading("Loading");
 
-            webView.Source = "http://103.67.154.117:806/Map/RoadMap?roadCode=" + obj.ToString() + "&section=MIRI";
+            webView.Source = "http://210.19.250.214/Map/RoadMap?roadCode=" + obj.ToString() + "&section=MIRI";
 
 
             webView.Navigated += WebView_Navigated;
