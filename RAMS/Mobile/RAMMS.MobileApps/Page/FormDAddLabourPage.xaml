@@ -96,7 +96,7 @@
 
                                 <locals:FrameRenders Grid.Row="1"  Grid.Column="0" BackgroundColor="White" FrameCornerRadius="7"   IsClippedToBounds="True" Padding="0,0,0,0"  ColorName="LightGray" Margin="0,0,0,0"   BorderColor="Black" >
                                     <!--<fe:AdvancedFrame Grid.Row="1" Grid.Column="0" InnerBackground="{StaticResource DashboardbgColor}" OutlineColor="{StaticResource BoxviewColor}">-->
-                                    <local:EntryControl x:Name="enctrlQty"  Text="{Binding strQty}" Keyboard="Numeric" MaxLength="2"  TextColor="Black" ClassId="ClassDetails" FontFamily="{StaticResource ProximaNovaRegularFont}"   IsEnabled="True" />
+                                    <local:EntryControl x:Name="enctrlQty"  Text="{Binding strQty}" Keyboard="Numeric" MaxLength="7"  TextColor="Black" ClassId="ClassDetails" FontFamily="{StaticResource ProximaNovaRegularFont}"   IsEnabled="True" />
                                 <!--</fe:AdvancedFrame>-->
                                 </locals:FrameRenders>
                                 <Label Text="Unit" Grid.Row="0" Grid.Column="2" TextColor="Black" FontSize="Medium"/>

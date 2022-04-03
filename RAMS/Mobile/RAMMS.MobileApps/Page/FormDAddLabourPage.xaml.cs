@@ -18,5 +18,6 @@ namespace RAMMS.MobileApps.Page
             this.BackgroundColor = new Color(0, 0, 0, 0.6);
 
         }
+
     }
 }

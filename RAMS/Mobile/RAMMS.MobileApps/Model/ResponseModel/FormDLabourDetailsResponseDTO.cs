@@ -22,7 +22,7 @@ namespace RAMMS.DTO.RequestBO
         public string LabourDesc { get; set; }
 
         
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         
         public string Unit { get; set; }
